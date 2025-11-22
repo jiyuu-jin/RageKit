@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧨 RageQuit Kit
 
-## Getting Started
+> When you’re tilted, don’t think — **hit the button**.  
+> RageQuit Kit is a degen panic button that exits your risk tokens into stables across chains using **Privy** + **1inch**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ What is RageQuit Kit?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+RageQuit Kit is a small but mean dApp for people who ape first and regret later.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+In your **calm state**, you create a *RageQuit profile* that defines:
+- Which **tokens** are “degen risk” (e.g. PEPE, random casino tokens)
+- Which **chain** you want to end up on (e.g. Base)
+- Which **stablecoin** you want to hold (e.g. USDC)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+In your **tilted state**, you:
+- Log in with **Privy** (embedded wallet or connected wallet)
+- Smash the **RageQuit** button
+- We:
+  - Read your balances
+  - Build optimal swap routes via the **1inch API**
+  - Route everything into stables with a **single flow**
 
-## Learn More
+You go from scattered exposure → clean stable position, in one emotional moment.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧠 Core Idea
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Most DeFi tools help you optimize risk.  
+RageQuit Kit helps you **escape** it.
 
-## Deploy on Vercel
+- No portfolio theory.
+- No “maybe later” buttons.
+- Just: *“Please get me out.”*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ Tech Stack
+
+**Frontend**
+- [Next.js](https://nextjs.org/) (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [wagmi](https://wagmi.sh/) / [viem](https://viem.sh/) for EVM interactions
+
+**Auth & Wallets**
+- [Privy](https://www.privy.io/)
+  - Embedded wallets for normies
+  - Connect existing wallets for power users
+
+**Swaps & Routing**
+- [1inch API](https://portal.1inch.dev/)
+  - Multi-chain swap routes
+  - Optimized DEX routing under the hood
+
+**Infra**
+- Vercel
+- RPC provider(s) of your choice (Alchemy, Infura, Ankr, etc.)
