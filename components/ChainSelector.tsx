@@ -24,11 +24,11 @@ export function ChainSelector({
   )
 
   return (
-    <div className="w-full max-w-4xl">
-      <h3 className="text-xl font-bold text-white mb-4">
-        Target Chain & Stablecoin
+    <div className="bg-slate-900/80 backdrop-blur border border-slate-800 rounded-xl p-4">
+      <h3 className="text-lg font-bold text-white mb-3">
+        Exit to:
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div className="flex flex-col gap-2">
         {availableChains.map((chain) => {
           const stablecoin = STABLECOINS[chain.id][0]
           const isSelected = selectedChainId === chain.id
@@ -38,22 +38,22 @@ export function ChainSelector({
             <button
               key={chain.id}
               onClick={() => onSelectChain(chain.id)}
-              className={`relative p-5 rounded-xl border-2 transition-all ${
+              className={`relative p-3 rounded-lg border-2 transition-all flex items-center gap-3 ${
                 isSelected
-                  ? 'border-red-500 bg-red-500/10 shadow-lg shadow-red-500/20'
+                  ? 'border-blue-500 bg-blue-500/10'
                   : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
               }`}
             >
               {isSelected && (
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
               )}
-              <div className="text-center">
-                <div className="text-3xl mb-2">{emoji}</div>
-                <p className={`font-bold text-sm mb-1 ${isSelected ? 'text-white' : 'text-gray-300'}`}>
+              <div className="text-2xl">{emoji}</div>
+              <div className="flex-1 text-left">
+                <p className={`font-bold text-sm ${isSelected ? 'text-white' : 'text-gray-300'}`}>
                   {chain.name}
                 </p>
                 <p className="text-xs text-gray-500">
@@ -64,8 +64,8 @@ export function ChainSelector({
           )
         })}
       </div>
-      <p className="text-sm text-gray-500 mt-4 text-center">
-        All tokens will be swapped to {STABLECOINS[selectedChainId]?.[0]?.symbol || 'USDC'} on {SUPPORTED_CHAINS.find(c => c.id === selectedChainId)?.name || 'selected chain'}
+      <p className="text-xs text-gray-500 mt-3">
+        All tokens will be swapped to {STABLECOINS[selectedChainId]?.[0]?.symbol || 'USDC'} on {SUPPORTED_CHAINS.find(c => c.id === selectedChainId)?.name || 'Base'}
       </p>
     </div>
   )

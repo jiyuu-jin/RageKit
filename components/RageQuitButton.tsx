@@ -131,7 +131,7 @@ export function RageQuitButton({
               dst: targetStable.address,
               amount: balance.rawBalance.toString(),
               from: address,
-              slippage: 5, // 5% slippage for speed
+              slippage: 3, // 3% slippage
             })
 
             const swapHash = await walletClient.sendTransaction({

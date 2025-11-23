@@ -1,13 +1,13 @@
-# 🧨 RageQuit Kit
+# 🧨 RageKit
 
 > When you’re tilted, don’t think — **hit the button**.  
-> RageQuit Kit is a degen panic button that exits your risk tokens into stables across chains using **Privy** + **1inch**.
+> RageKit is a degen panic button that exits your risk tokens into stables across chains using **Privy** + **1inch**.
 
 ---
 
-## ✨ What is RageQuit Kit?
+## ✨ What is RageKit?
 
-RageQuit Kit is a small but mean dApp for people who ape first and regret later.
+RageKit is a small but mean dApp for people who ape first and regret later.
 
 In your **calm state**, you create a *RageQuit profile* that defines:
 - Which **tokens** are “degen risk” (e.g. PEPE, random casino tokens)
@@ -29,7 +29,7 @@ You go from scattered exposure → clean stable position, in one emotional momen
 ## 🧠 Core Idea
 
 Most DeFi tools help you optimize risk.  
-RageQuit Kit helps you **escape** it.
+RageKit helps you **escape** it.
 
 - No portfolio theory.
 - No “maybe later” buttons.
