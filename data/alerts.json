@@ -1,0 +1,10 @@
+[
+  {
+    "userId": 1089679235,
+    "tokenSymbol": "PEPE",
+    "threshold": 0.0001,
+    "direction": "below",
+    "chainId": 1,
+    "tokenAddress": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+  }
+]
