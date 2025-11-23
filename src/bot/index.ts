@@ -169,10 +169,9 @@ function getChainName(chainId: number): string {
 
 // Start command
 bot.start(async (ctx: Context) => {
-  const welcomeMessage = `
-🧨 *Welcome to RageGuard*
+  const welcomeMessage = `🧨 *Welcome to RageGuard*
 
-Your helper for *Ragekit* —* when you're tilted, don't think — *hit the button*.
+Your helper for *RageQuit* - when you're tilted, don't think - *hit the button*.
 
 RageGuard helps you learn about and access RageQuit, which exits your degen tokens into stablecoins across multiple chains.
 
@@ -192,8 +191,7 @@ RageGuard helps you learn about and access RageQuit, which exits your degen toke
 3. Select your target chain and stablecoin
 4. Hit the RageQuit button to exit all positions
 
-Ready to rage quit? Use /webapp to get started!
-  `
+Ready to rage quit? Use /webapp to get started!`
   await ctx.reply(welcomeMessage, { parse_mode: 'Markdown' })
 })
 
@@ -324,8 +322,8 @@ Usage: \`/alert TOKEN above|below PRICE\`
 
 *Examples:*
 \`/alert PEPE above 0.00001\` - Alert when PEPE goes above $0.00001
-\`/alert SHIB below 0.000008\` - Alert when SHIB goes below $0.000008
-\`/alert DEGEN above 0.5\` - Alert when DEGEN goes above $0.50
+\`/alert SHIB below 0.05\` - Alert when SHIB goes below $0.000008
+\`/alert DEGEN above 0.005\` - Alert when DEGEN goes above $0.50
 
 *Available tokens:* PEPE, SHIB, DEGEN
 
@@ -381,14 +379,16 @@ Use /tokens to see all tracked tokens.
   }
 
   // Create or update alert
-  priceAlerts.set(alertKey, {
+  const alert: PriceAlert = {
     userId,
     tokenSymbol: token.symbol,
     threshold,
     direction: directionLower as 'above' | 'below',
     chainId: token.chainId,
     tokenAddress: token.address,
-  })
+  }
+
+  priceAlerts.set(alertKey, alert)
 
   // Save to file
   await saveAlerts()
@@ -397,6 +397,48 @@ Use /tokens to see all tracked tokens.
   await ctx.reply(
     `✅ Alert set!\n\n${directionEmoji} ${token.symbol} ${directionLower} $${formatPrice(threshold)}\n\nI'll notify you when the price hits this threshold!`,
   )
+
+  // DEMO MODE: Auto-trigger after 3 seconds (remove after demo)
+  setTimeout(async () => {
+    const webappUrl = process.env.WEBAPP_URL || 'http://localhost:3000'
+    const chainName = getChainName(alert.chainId)
+    const directionEmoji = alert.direction === 'above' ? '📈' : '📉'
+    // For "above" alerts, price should be higher than threshold. For "below", it should be lower.
+    const currentPrice = alert.direction === 'above' 
+      ? threshold * 1.1  // Price went above threshold
+      : threshold * 0.9  // Price went below threshold
+    
+    const notificationMessage = `
+🚨 *Price Alert Triggered!*
+
+${directionEmoji} *${alert.tokenSymbol}* is now ${alert.direction} $${formatPrice(alert.threshold)}
+
+*Current Price:* $${formatPrice(currentPrice)}
+*Chain:* ${chainName}
+
+*Time to RageQuit!* 🧨
+
+Click below to exit your positions:
+    `
+
+    try {
+      // Use the exact same method as real alerts - bot.telegram.sendMessage
+      await bot.telegram.sendMessage(alert.userId, notificationMessage, {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: '🚀 RageQuit Now', url: webappUrl }],
+          ],
+        },
+      })
+
+      // Remove the alert after triggering (same as real alerts)
+      priceAlerts.delete(alertKey)
+      await saveAlerts()
+    } catch (error) {
+      console.error('Error sending demo alert:', error)
+    }
+  }, 3000) // 3 second delay for demo
 })
 
 // Alerts command - List user's alerts
