@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RageQuit Kit | Degen Panic Button",
+  title: "RageKit | Degen Panic Button",
   description: "When you're tilted, don't think — hit the button. Exit your risk tokens into stables across chains.",
 };
 
