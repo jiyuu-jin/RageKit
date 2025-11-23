@@ -180,37 +180,54 @@ export function RageQuitButton({
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full">
+    <div className="flex flex-col items-center gap-6 w-full">
       <button
         onClick={executeRageQuit}
         disabled={isExecuting || balances.length === 0}
-        className="relative px-8 py-6 text-2xl font-bold text-white bg-red-600 rounded-lg shadow-lg hover:bg-red-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 min-w-[300px]"
+        className="group relative w-full py-8 text-3xl font-black text-white bg-linear-to-r from-red-600 via-red-500 to-orange-600 rounded-2xl shadow-2xl hover:shadow-red-500/50 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 overflow-hidden"
       >
-        {isExecuting ? (
-          <span className="animate-pulse">RAGING...</span>
-        ) : (
-          '🧨 RAGEQUIT'
-        )}
+        {/* Animated background */}
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+        <span className="relative flex items-center justify-center gap-3">
+          {isExecuting ? (
+            <>
+              <span className="animate-spin text-4xl">🧨</span>
+              <span className="animate-pulse">RAGING...</span>
+            </>
+          ) : (
+            <>
+              <span className="group-hover:animate-bounce">🧨</span>
+              <span>RAGEQUIT</span>
+            </>
+          )}
+        </span>
       </button>
 
       {isExecuting && (
-        <div className="w-full max-w-md">
-          <div className="bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div className="w-full space-y-3">
+          <div className="bg-slate-800 rounded-full h-3 overflow-hidden">
             <div
-              className="bg-red-600 h-2.5 rounded-full transition-all duration-300"
+              className="h-full bg-linear-to-r from-red-500 via-orange-500 to-red-600 rounded-full transition-all duration-500 shadow-lg shadow-red-500/50"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <p className="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">
-            {status}
-          </p>
+          <div className="flex items-center justify-center gap-2">
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+            <p className="text-sm text-center text-gray-400 font-medium">
+              {status}
+            </p>
+          </div>
         </div>
       )}
 
       {!isExecuting && status && (
-        <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-          {status}
-        </p>
+        <div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-lg">
+          <span className="text-2xl">🎉</span>
+          <p className="text-sm text-green-400 font-medium">
+            {status}
+          </p>
+        </div>
       )}
     </div>
   )

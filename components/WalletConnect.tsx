@@ -9,31 +9,29 @@ export function WalletConnect() {
 
   if (!authenticated) {
     return (
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Connect to start your RageQuit
-        </p>
-        <button
-          onClick={login}
-          className="px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-colors"
-        >
-          Connect Wallet
-        </button>
-      </div>
+      <button
+        onClick={login}
+        className="px-8 py-4 text-lg font-bold text-white bg-linear-to-r from-red-600 to-orange-600 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all border border-red-500/50"
+      >
+        Connect Wallet
+      </button>
     )
   }
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="text-sm">
-        <p className="text-gray-600 dark:text-gray-400">Connected</p>
-        <p className="font-mono font-semibold">
-          {address?.slice(0, 6)}...{address?.slice(-4)}
-        </p>
+    <div className="flex items-center gap-3 bg-slate-900/80 backdrop-blur border border-slate-800 rounded-xl px-5 py-3">
+      <div className="flex items-center gap-3">
+        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <div className="text-sm">
+          <p className="text-gray-500 text-xs">Connected</p>
+          <p className="font-mono font-bold text-white">
+            {address?.slice(0, 6)}...{address?.slice(-4)}
+          </p>
+        </div>
       </div>
       <button
         onClick={logout}
-        className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+        className="ml-3 px-4 py-2 text-sm font-medium text-gray-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
       >
         Disconnect
       </button>
